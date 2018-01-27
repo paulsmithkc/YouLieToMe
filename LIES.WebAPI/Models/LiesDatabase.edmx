@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LIES.WebAPI.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimestampUtc" Type="datetime" Nullable="false" />
+          <Property Name="TemplateId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Text" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ViewCount" Type="int" Nullable="false" />
+          <Property Name="Deaths" Type="int" Nullable="false" />
+          <Property Name="UpVotes" Type="int" Nullable="false" />
+          <Property Name="DownVotes" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="GetRandomMessages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TemplateId" Type="varchar" Mode="In" />
+          <Parameter Name="Level" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertDeathes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MessageId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="TemplateId" Type="varchar" Mode="In" />
+          <Parameter Name="Level" Type="int" Mode="In" />
+          <Parameter Name="Deaths" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TemplateId" Type="varchar" Mode="In" />
+          <Parameter Name="Level" Type="int" Mode="In" />
+          <Parameter Name="Text" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertUpDownVotes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MessageId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="TemplateId" Type="varchar" Mode="In" />
+          <Parameter Name="Level" Type="int" Mode="In" />
+          <Parameter Name="UpVotes" Type="int" Mode="In" />
+          <Parameter Name="DownVotes" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="LIESWebAPIModelsStoreContainer">
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LIES.WebAPI.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="Guid" Nullable="false" />
+          <Property Name="TimestampUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TemplateId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ViewCount" Type="Int32" Nullable="false" />
+          <Property Name="Deaths" Type="Int32" Nullable="false" />
+          <Property Name="UpVotes" Type="Int32" Nullable="false" />
+          <Property Name="DownVotes" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="LiesDatabase" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <FunctionImport Name="GetRandomMessages" ReturnType="Collection(LIES.WebAPI.Models.GetRandomMessages_Result)">
+            <Parameter Name="TemplateId" Mode="In" Type="String" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertDeathes">
+            <Parameter Name="MessageId" Mode="In" Type="Guid" />
+            <Parameter Name="TemplateId" Mode="In" Type="String" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+            <Parameter Name="Deaths" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertMessage">
+            <Parameter Name="TemplateId" Mode="In" Type="String" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUpDownVotes">
+            <Parameter Name="MessageId" Mode="In" Type="Guid" />
+            <Parameter Name="TemplateId" Mode="In" Type="String" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+            <Parameter Name="UpVotes" Mode="In" Type="Int32" />
+            <Parameter Name="DownVotes" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetRandomMessages_Result">
+          <Property Type="Guid" Name="MessageId" Nullable="false" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LIESWebAPIModelsStoreContainer" CdmEntityContainer="LiesDatabase">
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="LIES.WebAPI.Models.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="TimestampUtc" ColumnName="TimestampUtc" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="Deaths" ColumnName="Deaths" />
+                <ScalarProperty Name="UpVotes" ColumnName="UpVotes" />
+                <ScalarProperty Name="DownVotes" ColumnName="DownVotes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetRandomMessages" FunctionName="LIES.WebAPI.Models.Store.GetRandomMessages">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LIES.WebAPI.Models.GetRandomMessages_Result">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertDeathes" FunctionName="LIES.WebAPI.Models.Store.InsertDeathes" />
+          <FunctionImportMapping FunctionImportName="InsertMessage" FunctionName="LIES.WebAPI.Models.Store.InsertMessage" />
+          <FunctionImportMapping FunctionImportName="InsertUpDownVotes" FunctionName="LIES.WebAPI.Models.Store.InsertUpDownVotes" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

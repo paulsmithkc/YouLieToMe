@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIES.WebAPI", "LIES.WebAPI\LIES.WebAPI.csproj", "{A657C141-71CC-438D-9155-FF7A921DA7BB}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LIES.Database", "LIES.Database\LIES.Database.sqlproj", "{68DE0CEC-DB29-4820-92DF-36B5C7B99FC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A657C141-71CC-438D-9155-FF7A921DA7BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A657C141-71CC-438D-9155-FF7A921DA7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A657C141-71CC-438D-9155-FF7A921DA7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A657C141-71CC-438D-9155-FF7A921DA7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68DE0CEC-DB29-4820-92DF-36B5C7B99FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68DE0CEC-DB29-4820-92DF-36B5C7B99FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68DE0CEC-DB29-4820-92DF-36B5C7B99FC4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{68DE0CEC-DB29-4820-92DF-36B5C7B99FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68DE0CEC-DB29-4820-92DF-36B5C7B99FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68DE0CEC-DB29-4820-92DF-36B5C7B99FC4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CBF41D9-5B16-4F1C-B0A8-679BA921185C}
+	EndGlobalSection
+EndGlobal
