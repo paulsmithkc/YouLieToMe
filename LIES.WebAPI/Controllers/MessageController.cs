@@ -14,7 +14,7 @@ namespace LIES.WebAPI.Controllers
             int level
         )
         {
-            using (var db = new LiesDatabase())
+            using (var db = Utils.ConnectToDatabase())
             {
                 var messages = db.GetRandomMessages(
                     templateId: templateId,
@@ -31,7 +31,7 @@ namespace LIES.WebAPI.Controllers
             string text
         )
         {
-            using (var db = new LiesDatabase())
+            using (var db = Utils.ConnectToDatabase())
             {
                 db.InsertMessage(
                     templateId: templateId,
@@ -50,7 +50,7 @@ namespace LIES.WebAPI.Controllers
             int deaths
         )
         {
-            using (var db = new LiesDatabase())
+            using (var db = Utils.ConnectToDatabase())
             {
                 db.InsertDeathes(
                     messageId: messageId,
@@ -71,7 +71,7 @@ namespace LIES.WebAPI.Controllers
             int downVotes
         )
         {
-            using (var db = new LiesDatabase())
+            using (var db = Utils.ConnectToDatabase())
             {
                 db.InsertUpDownVotes(
                     messageId: messageId,

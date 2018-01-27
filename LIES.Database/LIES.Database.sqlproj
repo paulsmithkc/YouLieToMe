@@ -69,6 +69,7 @@
     <Build Include="StoredProcedures\GetRandomMessages.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Publish\LIES.Database.publish.xml" />
+    <None Include="Publish\LOCAL.xml" />
+    <None Include="Publish\AWS.publish.xml" />
   </ItemGroup>
 </Project>
